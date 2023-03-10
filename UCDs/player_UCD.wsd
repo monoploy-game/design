@@ -1,0 +1,35 @@
+@@startuml "Monopoly player usecase diagram"
+
+
+left to right direction
+skinparam style strictuml
+
+actor "player" as plr
+
+package oneGame {
+
+    package game {
+        usecase "leave game" as lg
+    }
+
+    package transactions {
+        package actions {
+            usecase "initiat transaction to another player or bank" as st
+        }
+        package history {
+            usecase "see history of transaction of one player" as seeplrtr
+            usecase "see history of transaction of bank" as seebnktr
+            usecase "see history of transaction of his own" as seeselftr
+            usecase "see history of transaction of all player and bank" as seealltr
+        }
+    }
+}
+
+plr --> lg
+plr --> st
+plr --> seeplrtr
+plr --> seebnktr
+plr --> seeselftr
+plr --> seealltr
+
+@@enduml

@@ -1,0 +1,13 @@
+@@startuml "Monopoly player usecase diagram"
+
+actor Admin as adm
+actor Player as plr
+actor Guest as gst
+
+usecase "monopoly game" as mgm
+
+adm --> mgm
+plr --> mgm
+gst --> mgm
+
+@@enduml

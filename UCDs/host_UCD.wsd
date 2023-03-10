@@ -1,0 +1,51 @@
+@@startuml "Monopoly admin usecase diagram"
+
+left to right direction
+skinparam style strictuml
+
+actor "game hoster/admin" as ad
+
+package oneGame {
+
+    package players {
+        usecase "see players joining requests" as sr
+        usecase "accept/refuse joining request" as ar
+        usecase "kick player out" as kp
+    }
+
+    package game {
+        usecase "start game" as strtg
+        usecase "end game" as eg
+    }
+
+    package transactions {
+        package actions {
+            usecase "see transactions requests" as st
+            usecase "accept/refuse transactions" as at
+            usecase "initiate transaction from bank to player" as itgp
+        }
+        package history {
+            usecase "see history of transaction of one player" as seeplrtr
+            usecase "see history of transaction of bank" as seebnktr
+            usecase "see history of transaction of all player and bank" as seealltr
+        }
+    }
+}
+
+ad --> sr
+ad --> ar
+ad --> kp
+
+ad --> strtg
+ad --> eg
+
+ad --> st
+ad --> at
+ad --> itgp
+
+ad --> seeplrtr
+ad --> seebnktr
+
+ad --> seealltr
+
+@@enduml
