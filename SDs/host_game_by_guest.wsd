@@ -1,0 +1,10 @@
+@@startuml
+
+actor Guest
+
+Activate Guest
+Activate System
+Guest -> System : Host new game
+System -> System : change state of Guest to game admin
+
+@@enduml
