@@ -4,7 +4,14 @@ actor Guest
 
 Activate Guest
 Activate System
-Guest -> System : Host new game
+
+Guest ->  System : Host new game
 System -> System : change state of Guest to game admin
+System -> Guest : ask for user name
+Guest ->  System : provide with username
+
+System -> System : take to the new game waiting room
+
+
 
 @@enduml

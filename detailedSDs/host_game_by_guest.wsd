@@ -1,0 +1,31 @@
+@@startuml
+
+actor Guest
+
+Activate Guest
+Activate FrontEnd
+
+Guest ->  FrontEnd : Host new game
+FrontEnd -> FrontEnd : change state of Guest to game admin
+FrontEnd -> Guest : ask for user name
+Guest ->  FrontEnd : provide with username
+
+FrontEnd -> BackEnd : create_new_game(string AdminName)
+Activate BackEnd
+
+BackEnd -> BackEnd : create jwt for user
+
+BackEnd -> Database : save game and admin data
+Activate Database
+
+Database -> BackEnd : success
+Deactivate Database
+
+BackEnd -> FrontEnd : jwt with access roles
+Deactivate BackEnd
+
+FrontEnd -> FrontEnd : take to the new game waiting room
+
+
+
+@@enduml
