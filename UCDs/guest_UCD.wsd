@@ -8,7 +8,7 @@ actor Guest as g
 package GuestUseCases {
 
 usecase "host new game" as hg
-usecase "see available games in the network" as sg
+usecase "see available games" as sg
 usecase "join a game as player" as jg
 usecase "join a game as viewer" as vg
 
