@@ -1,0 +1,16 @@
+@@startuml
+
+actor Guest
+
+
+Activate System
+
+ref over Guest,System: create games by admin
+
+Guest ->  System : Join Game Button
+Activate Guest
+
+System -> System : get available games
+System -> Guest : show available games
+
+@@enduml

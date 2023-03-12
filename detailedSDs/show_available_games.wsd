@@ -1,0 +1,29 @@
+@@startuml
+
+actor Guest
+
+
+
+ref over Guest,FrontEnd: create games by admin
+
+Guest ->  FrontEnd : Join Game Button
+Activate Guest
+Activate FrontEnd
+
+FrontEnd -> BackEnd : get available games
+Activate BackEnd
+
+BackEnd -> dataBase : get available not started games
+Activate dataBase
+
+dataBase -> BackEnd : games list
+deactivate dataBase
+
+BackEnd -> FrontEnd : games list
+deactivate BackEnd
+
+FrontEnd -> Guest : show available games
+
+
+
+@@enduml
