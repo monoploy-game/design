@@ -4,7 +4,7 @@ actor Guest
 
 
 
-ref over Guest,FrontEnd: create games by admin
+ref over Guest,FrontEnd,BackEnd,dataBase: create games by admin
 
 Guest ->  FrontEnd : Join Game Button
 Activate Guest
