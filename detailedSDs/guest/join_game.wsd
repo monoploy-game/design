@@ -1,0 +1,41 @@
+@startuml
+
+actor Guest
+
+Activate Guest
+Activate GuestFrontEnd
+Activate BackEnd
+Activate dataBase
+Activate Admin
+
+ref over Guest,GuestFrontEnd, BackEnd, dataBase : see available games usecase
+deactivate BackEnd
+deactivate dataBase
+
+Guest -> GuestFrontEnd : choose a game from the list
+
+GuestFrontEnd -> BackEnd : check Game(game)
+Activate BackEnd
+
+BackEnd -> dataBase : get game current players()
+Activate dataBase
+dataBase -> BackEnd : joined player + max players
+deactivate dataBase
+
+BackEnd -> BackEnd : calculate if there is room
+BackEnd -> GuestFrontEnd : yes there is room
+deactivate BackEnd
+
+GuestFrontEnd -> Guest : ask for a name and color
+Guest -> GuestFrontEnd : choose the name and color
+
+GuestFrontEnd -> BackEnd : name and color
+Activate BackEnd
+
+ref over Admin,GuestFrontEnd : see players joining requests
+ref over Admin,GuestFrontEnd : accept joining request
+
+BackEnd -> GuestFrontEnd : give game jwt
+GuestFrontEnd -> Guest : send to the waiting room
+
+@enduml
