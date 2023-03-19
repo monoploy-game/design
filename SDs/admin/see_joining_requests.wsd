@@ -1,0 +1,14 @@
+@startuml see players joining requests
+
+actor Admin
+
+activate Admin
+activate System
+
+ref over Admin, System: host new game usecase
+
+Admin -> System : click on show request button
+System -> System : get joining request
+System -> Admin : show list of request with accept and refuse buttons
+
+@enduml
