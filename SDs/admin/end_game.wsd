@@ -1,0 +1,16 @@
+@startuml
+
+actor Admin
+
+Activate Admin
+Activate System
+
+ref over Admin, System : start game usecase
+
+Admin -> System : click end game button
+System -> Admin : ask admin to confirme his action
+Admin -> System : confrimes his action
+System -> System : set the game state to archived
+System -> Admin : change state to guest
+
+@enduml

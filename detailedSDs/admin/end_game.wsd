@@ -1,0 +1,28 @@
+@startuml
+
+actor Admin
+
+Activate Admin
+Activate FrontEnd
+
+ref over Admin, FrontEnd, BackEnd, Database : start game usecase
+
+Admin ->  FrontEnd : click end game button
+FrontEnd -> Admin : ask the admin to confirme his decision
+Admin -> FrontEnd : click on confirme button
+
+FrontEnd -> BackEnd : end game(game)
+Activate BackEnd
+
+BackEnd -> Database : set game state to archived (game)
+Activate Database
+
+Database -> BackEnd : confirme
+deactivate Database
+
+BackEnd -> FrontEnd : confirme
+deactivate BackEnd
+
+FrontEnd -> Admin : show the guest interface
+
+@enduml
