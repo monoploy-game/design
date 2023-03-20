@@ -1,4 +1,4 @@
-@@startuml
+@startuml
 
 actor Guest
 
@@ -12,6 +12,11 @@ Guest ->  System : provide with username
 
 System -> System : take to the new game waiting room
 
+loop intel start or end game usecases are choosen
+    System -> System : get joined players list
+    System -> Guest : show players list
+end
 
 
-@@enduml
+
+@enduml

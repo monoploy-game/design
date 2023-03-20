@@ -1,4 +1,4 @@
-@@startuml
+@startuml
 
 actor Guest
 
@@ -26,6 +26,22 @@ Deactivate BackEnd
 
 FrontEnd -> FrontEnd : take to the new game waiting room
 
+loop intel start or end game usecases are choosen
 
+    FrontEnd -> BackEnd : get joined players list
+    Activate BackEnd
 
-@@enduml
+    BackEnd -> Database : get list of joined players in the game
+    Activate Database
+
+    Database -> BackEnd : list of game players
+    deactivate Database
+
+    BackEnd -> FrontEnd : list of game players
+    deactivate BackEnd
+
+    FrontEnd -> Guest : show players list
+
+end
+
+@enduml
