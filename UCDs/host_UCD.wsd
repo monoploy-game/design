@@ -8,7 +8,6 @@ actor "game hoster/admin" as ad
 package oneGame {
 
     package players {
-        usecase "show list of players" as sp
         usecase "kick player out" as kp
     }
 
@@ -32,7 +31,6 @@ package oneGame {
 }
 
 ad --> kp
-ad --> sp
 
 ad --> strtg
 ad --> eg
