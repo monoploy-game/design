@@ -1,4 +1,4 @@
-@@startuml "Monopoly admin usecase diagram"
+@startuml "Monopoly admin usecase diagram"
 
 left to right direction
 skinparam style strictuml
@@ -8,8 +8,7 @@ actor "game hoster/admin" as ad
 package oneGame {
 
     package players {
-        usecase "see players joining requests" as sr
-        usecase "accept/refuse joining request" as ar
+        usecase "show list of players" as sp
         usecase "kick player out" as kp
     }
 
@@ -32,9 +31,8 @@ package oneGame {
     }
 }
 
-ad --> sr
-ad --> ar
 ad --> kp
+ad --> sp
 
 ad --> strtg
 ad --> eg
@@ -48,4 +46,4 @@ ad --> seebnktr
 
 ad --> seealltr
 
-@@enduml
+@enduml
