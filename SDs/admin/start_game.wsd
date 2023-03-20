@@ -1,0 +1,16 @@
+@startuml
+
+actor Admin
+
+Activate Admin
+Activate System
+
+ref over Admin, System : host game usecase
+
+Admin -> System : start game
+System -> System : give each player the initial amount of money
+System -> System : change state of game from waiting to started
+System -> System : change display to playing room
+System -> Admin : show the playing room
+
+@enduml

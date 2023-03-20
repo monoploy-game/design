@@ -1,0 +1,32 @@
+@startuml
+
+actor Admin
+
+Activate Admin
+Activate FrontEnd
+
+ref over Admin, FrontEnd, BackEnd, Database : host game usecase
+
+Admin ->  FrontEnd : click start game button
+
+FrontEnd -> BackEnd : start game(game)
+Activate BackEnd
+
+BackEnd -> Database : give each player the initial money amount(game)
+Activate Database
+
+Database -> BackEnd : confirme
+deactivate Database
+
+BackEnd -> Database : change state of game to playing(game)
+Activate Database
+
+Database -> BackEnd : confirme
+deactivate Database
+
+BackEnd -> FrontEnd : give the amount of money of each player
+deactivate BackEnd
+
+FrontEnd -> Admin : take to playing room
+
+@enduml
