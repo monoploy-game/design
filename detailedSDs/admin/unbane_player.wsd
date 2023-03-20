@@ -1,0 +1,57 @@
+@startuml
+
+actor Admin
+
+Activate Admin
+Activate FrontEnd
+
+ref over Admin, FrontEnd, BackEnd, Database : kick players out usecase
+
+Admin ->  FrontEnd : banned players list
+FrontEnd -> BackEnd : get banned players(game)
+Activate BackEnd
+
+BackEnd -> Database : get list of banned players(game)
+Activate Database
+
+Database -> BackEnd : list of banned players
+deactivate Database
+
+BackEnd -> FrontEnd : banned players list
+deactivate BackEnd
+
+FrontEnd -> Admin : show list of banned players
+
+Admin -> FrontEnd : click unban on a specific banned player
+FrontEnd -> BackEnd : unbanne player (player)
+Activate BackEnd
+
+BackEnd -> Database : delete player from banned list (player, game)
+Activate Database
+
+Database -> BackEnd : confirme
+deactivate Database
+
+BackEnd -> FrontEnd : confirme
+deactivate BackEnd
+
+
+loop intel start or end game usecases are choosen
+
+    FrontEnd -> BackEnd : get joined players list
+    Activate BackEnd
+
+    BackEnd -> Database : get list of joined players in the game
+    Activate Database
+
+    Database -> BackEnd : list of game players
+    deactivate Database
+
+    BackEnd -> FrontEnd : list of game players
+    deactivate BackEnd
+
+    FrontEnd -> Admin : show players list
+
+end
+
+@enduml

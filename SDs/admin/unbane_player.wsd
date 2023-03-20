@@ -1,0 +1,24 @@
+@startuml
+
+actor Admin
+
+Activate Admin
+Activate System
+
+ref over Admin, System : kick player out usecase
+
+Admin -> System : banned players list
+System -> System : get banned players list
+System -> Admin : show banned players list
+
+Admin ->  System : choose a player from the list and unbane them
+System -> System : unbane player
+
+loop intel start or end game usecases are choosen
+    System -> System : get joined players list
+    System -> Admin : show players list
+end
+
+
+
+@enduml
