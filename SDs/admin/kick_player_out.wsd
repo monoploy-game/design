@@ -1,0 +1,21 @@
+@startuml
+
+actor Admin
+
+Activate Admin
+Activate System
+
+ref over Admin, System : host game usecase
+
+Admin ->  System : choose a player and kick out
+System -> System : tag the player as banned
+System -> System : bane player from entering again
+
+loop intel start or end game usecases are choosen
+    System -> System : get joined players list
+    System -> Admin : show players list
+end
+
+
+
+@enduml
