@@ -1,0 +1,26 @@
+@startuml "initiate transaction to another player"
+
+actor Admin
+
+Activate Admin
+Activate FrontEnd
+
+ref over Admin, FrontEnd, BackEnd, Database: start game
+Activate player
+
+Admin ->  FrontEnd : click initiate transaction
+FrontEnd -> Admin : show transaction initiation form
+Admin -> FrontEnd : specify the amount and reciver player and confirme
+
+FrontEnd -> BackEnd : initiate transaction(reciver player, amount)
+activate BackEnd
+
+BackEnd -> Database : add amount to player balance
+Activate Database
+
+Database -> BackEnd : confirme
+deactivate BackEnd
+
+Database -> player : notify all the players about the transaction
+
+@enduml
