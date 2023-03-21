@@ -1,0 +1,25 @@
+@startuml "see transaction history of bank"
+
+actor Admin
+
+Activate Admin
+Activate FrontEnd
+
+Admin -> FrontEnd : click get histroy
+FrontEnd -> Admin : show options
+Admin -> FrontEnd : choose bank
+FrontEnd -> BackEnd : get bank transactions history(game)
+Activate BackEnd
+
+BackEnd -> Database : get list of transactions with status validated(game, bank)
+Activate Database
+
+Database -> BackEnd : list of transactions
+deactivate Database
+
+BackEnd -> FrontEnd : list of transactions
+
+
+FrontEnd -> Admin : show history
+
+@enduml

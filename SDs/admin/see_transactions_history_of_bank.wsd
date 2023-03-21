@@ -1,0 +1,17 @@
+@startuml "see transaction history of bank"
+
+actor Admin
+
+Activate Admin
+Activate System
+
+ref over Player, System : start game
+activate Player
+
+Admin -> System : click get histroy
+System -> Admin : show options
+Admin -> System : choose the bank
+System -> System : get bank transactions
+System -> Admin : show history
+
+@enduml
