@@ -19,7 +19,6 @@ package oneGame {
 
     package transactions {
         package actions {
-            usecase "see transactions requests" as st
             usecase "accept/refuse transactions" as at
             usecase "initiate transaction from bank to player" as itgp
         }

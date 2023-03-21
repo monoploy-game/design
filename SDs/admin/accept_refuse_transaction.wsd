@@ -1,0 +1,22 @@
+@startuml "accept or refuse transaction"
+
+actor Admin
+
+Activate Admin
+Activate System
+
+ref over Player, System : initiat transaction to another player or bank
+activate Player
+
+Admin -> System : click trasactions requests button
+System -> System : get list of transactions
+System -> Admin : show list of transactions
+Admin -> System : confirme a transaction
+System -> System : save transaction as confirmed and delete the amount from the sender and add it to the reciver
+
+loop every 1 second intel game ends
+System -> System : get list of transactions(game)
+
+    System -> Admin : show list of transactions request
+end
+@enduml

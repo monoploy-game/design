@@ -1,0 +1,67 @@
+@startuml "accept or refuse transaction"
+
+actor Admin
+
+Activate Admin
+Activate FrontEnd
+
+ref over FrontEnd, BackEnd, Database, player: initiat transaction to another player or bank
+Activate player
+
+Admin ->  FrontEnd : click trasactions requests button
+
+FrontEnd -> BackEnd : get list of transactions(game)
+Activate BackEnd
+
+BackEnd -> Database : list of transactions with status waiting(game)
+Activate Database
+
+Database -> BackEnd : send list
+deactivate Database
+
+BackEnd -> FrontEnd : send list
+deactivate BackEnd
+
+FrontEnd -> Admin : show list of transactions request
+Admin -> FrontEnd : confirme a transaction
+
+FrontEnd -> BackEnd : confirme a transaction
+Activate BackEnd
+
+BackEnd -> Database : get the amount of money of the transaction
+Activate Database
+
+Database -> BackEnd : send the amount and sender and reciver
+deactivate Database
+
+BackEnd -> Database : substracte the amount of money from the sender
+Activate Database
+
+Database -> BackEnd : confirme
+deactivate Database
+
+BackEnd -> Database : add the amount to the reciver
+Activate Database
+
+Database -> BackEnd : confirme
+deactivate Database
+
+deactivate BackEnd
+
+loop every 1 second intel game ends
+    FrontEnd -> BackEnd : get list of transactions(game)
+    Activate BackEnd
+
+    BackEnd -> Database : list of transactions with status waiting(game)
+    Activate Database
+
+    Database -> BackEnd : send list
+    deactivate Database
+
+    BackEnd -> FrontEnd : send list
+    deactivate BackEnd
+
+    FrontEnd -> Admin : show list of transactions request
+ end
+
+@enduml
