@@ -1,0 +1,25 @@
+@startuml "see transaction history of one player"
+
+actor Admin
+
+Activate Admin
+Activate FrontEnd
+
+Admin -> FrontEnd : click get histroy of player
+FrontEnd -> Admin : list of players
+Admin -> FrontEnd : choose players
+FrontEnd -> BackEnd : get player transactions history(game)
+Activate BackEnd
+
+BackEnd -> Database : get list of transactions with status validated(game, player)
+Activate Database
+
+Database -> BackEnd : list of transactions
+deactivate Database
+
+BackEnd -> FrontEnd : list of transactions
+
+
+FrontEnd -> Admin : show history
+
+@enduml

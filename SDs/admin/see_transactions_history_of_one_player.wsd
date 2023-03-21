@@ -1,0 +1,17 @@
+@startuml "see transaction history of one player"
+
+actor Admin
+
+Activate Admin
+Activate System
+
+ref over Player, System : start game
+activate Player
+
+Admin -> System : click get histroy of player
+System -> Admin : list of players
+Admin -> System : choose players
+System -> System : get player transactions history
+System -> Admin : show history
+
+@enduml
