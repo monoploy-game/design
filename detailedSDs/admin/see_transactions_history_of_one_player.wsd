@@ -5,8 +5,8 @@ actor Admin
 Activate Admin
 Activate FrontEnd
 
-Admin -> FrontEnd : click get histroy of player
-FrontEnd -> Admin : list of players
+Admin -> FrontEnd : click get histroy
+FrontEnd -> Admin : show options
 Admin -> FrontEnd : choose players
 FrontEnd -> BackEnd : get player transactions history(game)
 Activate BackEnd

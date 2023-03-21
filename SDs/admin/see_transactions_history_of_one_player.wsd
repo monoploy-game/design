@@ -8,9 +8,9 @@ Activate System
 ref over Player, System : start game
 activate Player
 
-Admin -> System : click get histroy of player
-System -> Admin : list of players
-Admin -> System : choose players
+Admin -> System : click get histroy
+System -> Admin : show options
+Admin -> System : choose player
 System -> System : get player transactions history
 System -> Admin : show history
 
