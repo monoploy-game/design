@@ -1,0 +1,17 @@
+@startuml "see transactions full history"
+
+actor Admin
+
+Activate Admin
+Activate System
+
+ref over Player, System : start game
+activate Player
+
+Admin -> System : click get histroy
+System -> Admin : show options
+Admin -> System : choose the full
+System -> System : get full
+System -> Admin : show history
+
+@enduml
