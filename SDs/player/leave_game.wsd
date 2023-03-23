@@ -1,0 +1,20 @@
+@startuml
+
+actor Player
+
+Activate Player
+Activate System
+
+ref over Player, System : join game
+
+actor Admin
+Activate Admin
+ref over Admin, System : start game usecase
+
+Player -> System : leave game
+System -> Player : ask to confirme
+Player -> System : confirme
+System -> System : player leave the game
+System -> System : change to guest state
+
+@enduml
