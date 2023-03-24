@@ -1,5 +1,4 @@
-@@startuml "Monopoly player usecase diagram"
-
+@startuml "Monopoly player usecase diagram"
 
 left to right direction
 skinparam style strictuml
@@ -19,7 +18,6 @@ package oneGame {
         package history {
             usecase "see history of transaction of one player" as seeplrtr
             usecase "see history of transaction of bank" as seebnktr
-            usecase "see history of transaction of his own" as seeselftr
             usecase "see history of transaction of all player and bank" as seealltr
         }
     }
@@ -29,7 +27,6 @@ plr --> lg
 plr --> st
 plr --> seeplrtr
 plr --> seebnktr
-plr --> seeselftr
 plr --> seealltr
 
-@@enduml
+@enduml
