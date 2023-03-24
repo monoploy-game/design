@@ -1,0 +1,90 @@
+@startuml "Monopoly usecase diagram"
+
+left to right direction
+
+
+actor Guest as g
+actor player as plr
+actor admin as ad
+
+package GuestUseCases {
+
+usecase "host new game" as hg
+usecase "see available games" as sg
+usecase "join a game as player" as jg
+usecase "join a game as viewer" as vg
+
+}
+
+
+package oneGame {
+
+    package players {
+        usecase "kick and bane player out" as kp
+	usecase "unbane player" as ubp
+    }
+
+    package game {
+        usecase "start game" as strtg
+        usecase "end game" as eg
+    }
+
+    package transactions {
+        package actions {
+            usecase "accept/refuse transactions" as at
+            usecase "initiate transaction from bank to player" as itgp
+        }
+        package history {
+            usecase "see history of transaction of one player" as seeplrtr
+            usecase "see history of transaction of bank" as seebnktr
+            usecase "see history of transaction of all player and bank" as seealltr
+        }
+    }
+}
+
+
+
+package oneGame {
+
+    package game {
+        usecase "leave game" as lg
+    }
+
+    package transactions {
+        package actions {
+            usecase "initiat transaction to another player or bank" as st
+        }
+        package history {
+            usecase "see history of transaction of one player" as seeplrtr
+            usecase "see history of transaction of bank" as seebnktr
+            usecase "see history of transaction of all player and bank" as seealltr
+        }
+    }
+}
+
+plr --> lg
+plr --> st
+plr --> seeplrtr
+plr --> seebnktr
+plr --> seealltr
+
+g --> hg
+g --> sg
+g --> jg
+g --> vg
+
+ad --up-> kp
+ad --up-> ubp
+
+ad --up-> strtg
+ad --up-> eg
+
+ad --up-> at
+ad --up-> itgp
+
+ad --up-> seeplrtr
+ad --up-> seebnktr
+
+ad --up-> seealltr
+
+@enduml
