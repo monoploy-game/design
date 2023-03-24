@@ -1,0 +1,26 @@
+@startuml
+
+actor Player
+
+Activate Player
+Activate FrontEnd
+
+ref over Player, FrontEnd, BackEnd, DataBase : join game
+
+actor Admin
+Activate Admin
+ref over Admin, FrontEnd, BackEnd, DataBase : start game usecase
+
+Player -> FrontEnd : click leave button
+FrontEnd -> BackEnd : leave game(game, player)
+Activate BackEnd
+
+BackEnd -> DataBase : set player state as left
+Activate DataBase
+
+DataBase -> BackEnd : confirmed
+BackEnd -> FrontEnd : confirmed
+
+FrontEnd -> Player : show guest scene
+
+@enduml
