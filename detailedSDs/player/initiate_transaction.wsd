@@ -1,0 +1,53 @@
+@startuml
+
+actor Player
+
+Activate Player
+Activate FrontEnd
+
+ref over Player, FrontEnd, BackEnd, DataBase : join game
+
+actor Admin
+Activate Admin
+ref over Admin, FrontEnd, BackEnd, DataBase : start game usecase
+
+Player -> FrontEnd : click initiate transaction button
+FrontEnd -> Player : show forum
+Player -> FrontEnd : fill forum
+FrontEnd -> BackEnd : post forum(game, player, reciver, amount)
+Activate BackEnd
+
+BackEnd -> DataBase : get player money data
+Activate DataBase
+
+DataBase -> BackEnd : data
+deactivate DataBase
+
+BackEnd -> BackEnd : compare amount with data
+
+alt available case
+    BackEnd -> DataBase : add request to request table
+    Activate DataBase
+
+    DataBase -> BackEnd : confirme
+    deactivate DataBase
+
+    ref over Admin, BackEnd, DataBase : confirme/refuse transaction
+
+    FrontEnd -> BackEnd : get new state
+    BackEnd -> DataBase : get new state
+    activate DataBase
+
+    DataBase -> BackEnd : data
+    BackEnd -> FrontEnd : data
+    FrontEnd -> Player : show new scene
+
+else unavailable case
+    BackEnd -> FrontEnd : moeny not enough
+    deactivate BackEnd
+
+    FrontEnd -> Player : moeny not enough
+end
+
+
+@enduml

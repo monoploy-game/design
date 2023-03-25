@@ -1,0 +1,22 @@
+@startuml
+
+actor Player
+
+Activate Player
+Activate System
+
+ref over Player, System : join game
+
+actor Admin
+Activate Admin
+ref over Admin, System : start game usecase
+
+Player -> System : click initiate transaction button
+System -> Player : ask to choose reciver and amount
+Player -> System : choose reciver and amount
+System -> System : verify the player have the money
+System -> System : add request for transaction on list of transaction to confirme by admin
+ref over Admin, System : confirme/refuse transaction
+System -> Player : show new state
+
+@enduml
