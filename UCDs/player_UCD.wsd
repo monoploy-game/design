@@ -29,4 +29,6 @@ plr --> seeplrtr
 plr --> seebnktr
 plr --> seealltr
 
+oneGame <. (authenticate) : include
+
 @enduml

@@ -43,5 +43,6 @@ ad --> seeplrtr
 ad --> seebnktr
 
 ad --> seealltr
+oneGame <. (authenticate) : include
 
 @enduml
