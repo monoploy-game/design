@@ -6,38 +6,44 @@ Activate Guest
 Activate FrontEnd
 
 Guest ->  FrontEnd : Host new game
-FrontEnd -> FrontEnd : change state of Guest to game admin
-FrontEnd -> Guest : ask for user name
-Guest ->  FrontEnd : provide with username
-
-FrontEnd -> BackEnd : create_new_game(string AdminName)
+FrontEnd -> BackEnd : create game(admin)
 Activate BackEnd
 
-BackEnd -> BackEnd : create jwt for user
+BackEnd -> Database : insert new game to games table(status=created)
+Activate Database
 
-BackEnd -> Database : save game and admin data
+Database -> BackEnd : reponse(newGameId)
+deactivate Database
+
+BackEnd -> Database : new player(game_Id= newGameId, role=admin)
 Activate Database
 
 Database -> BackEnd : success
-Deactivate Database
+deactivate Database
 
-BackEnd -> FrontEnd : jwt with access roles
-Deactivate BackEnd
+BackEnd -> FrontEnd : new Game info(players, configurations)
+deactivate BackEnd
 
-FrontEnd -> FrontEnd : take to the new game waiting room
+FrontEnd -> Guest : new Game waiting room
 
 loop intel start or end game usecases are choosen
 
-    FrontEnd -> BackEnd : get joined players list
+    FrontEnd -> BackEnd : refresh players list(admin info)
     Activate BackEnd
 
-    BackEnd -> Database : get list of joined players in the game
+    BackEnd -> Database : get game id(admin_info)
     Activate Database
 
-    Database -> BackEnd : list of game players
+    Database -> BackEnd : game id
     deactivate Database
 
-    BackEnd -> FrontEnd : list of game players
+    BackEnd -> Database : get players list(game_id)
+    Activate Database
+
+    Database -> BackEnd : players list
+    deactivate Database
+
+    BackEnd -> FrontEnd : players list
     deactivate BackEnd
 
     FrontEnd -> Guest : show players list
