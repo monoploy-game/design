@@ -13,7 +13,7 @@ Activate FrontEnd
 FrontEnd -> BackEnd : get available games
 Activate BackEnd
 
-BackEnd -> dataBase : get available not started games
+BackEnd -> dataBase : get games(where status = created)
 Activate dataBase
 
 dataBase -> BackEnd : games list
