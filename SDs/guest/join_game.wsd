@@ -10,12 +10,8 @@ ref over Guest,System : see available games usecase
 
 Guest -> System : choose a game from the list
 System -> System : check available room
-System -> Guest : ask for a name and color
-Guest -> System : choose the name and color
+System -> System : add player to game
 
-ref over Admin,System : see players joining requests
-ref over Admin,System : accept joining request
-
-System -> Guest : send to the waiting room
+System -> Guest : waiting room
 
 @enduml
