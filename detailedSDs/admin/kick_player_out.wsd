@@ -7,11 +7,11 @@ Activate FrontEnd
 
 ref over Admin, FrontEnd, BackEnd, Database : host game usecase
 
-Admin ->  FrontEnd : choose a player and kick out
-FrontEnd -> BackEnd : kick out and bane player (player)
+Admin ->  FrontEnd : click bane player
+FrontEnd -> BackEnd : bane player (player)
 Activate BackEnd
 
-BackEnd -> Database : add player to banned players and delete him from joined players
+BackEnd -> Database : set status as banned in the player table
 Activate Database
 
 Database -> BackEnd : confirme
@@ -20,13 +20,12 @@ deactivate Database
 BackEnd -> FrontEnd : confirme
 deactivate BackEnd
 
-
 loop intel start or end game usecases are choosen
 
-    FrontEnd -> BackEnd : get joined players list
+    FrontEnd -> BackEnd : get players list
     Activate BackEnd
 
-    BackEnd -> Database : get list of joined players in the game
+    BackEnd -> Database : get list of players
     Activate Database
 
     Database -> BackEnd : list of game players
