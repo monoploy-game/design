@@ -12,13 +12,13 @@ Admin ->  FrontEnd : click start game button
 FrontEnd -> BackEnd : start game(game)
 Activate BackEnd
 
-BackEnd -> Database : give each player the initial money amount(game)
+BackEnd -> Database : set amount money in player table for each player of the game to 1500(game)
 Activate Database
 
 Database -> BackEnd : confirme
 deactivate Database
 
-BackEnd -> Database : change state of game to playing(game)
+BackEnd -> Database : change state of game to started(game)
 Activate Database
 
 Database -> BackEnd : confirme
