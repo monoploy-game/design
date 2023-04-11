@@ -25,7 +25,7 @@ deactivate BackEnd
 FrontEnd -> Admin : show list of transactions request
 Admin -> FrontEnd : confirme a transaction
 
-FrontEnd -> BackEnd : confirme a transaction
+FrontEnd -> BackEnd : confirme a transaction(id)
 Activate BackEnd
 
 BackEnd -> Database : get the amount of money of the transaction
@@ -34,19 +34,51 @@ Activate Database
 Database -> BackEnd : send the amount and sender and reciver
 deactivate Database
 
-BackEnd -> Database : substracte the amount of money from the sender
-Activate Database
+alt  the sender new balance is positive
+    BackEnd -> Database : substracte the amount of money from the sender
+    Activate Database
 
-Database -> BackEnd : confirme
-deactivate Database
+    Database -> BackEnd : confirme
+    deactivate Database
 
-BackEnd -> Database : add the amount to the reciver
-Activate Database
+    BackEnd -> Database : add the amount to the reciver
+    Activate Database
 
-Database -> BackEnd : confirme
-deactivate Database
+    Database -> BackEnd : confirme
+    deactivate Database
 
-deactivate BackEnd
+    deactivate BackEnd
+else the sender new balance is negative
+
+    BackEnd -> FrontEnd : cant accept transaction(info)
+    deactivate BackEnd
+
+    FrontEnd -> Admin : show options in the transaction to refuse transaction or bankrupt player
+
+    alt refuse transaction
+        ref over Admin, FrontEnd, BackEnd, Database, player: refuse transaction
+    else buncrupt player
+        Admin -> FrontEnd : click on buncrupt player
+        FrontEnd -> BackEnd : buncrupt player(player)
+        Activate BackEnd
+
+        BackEnd -> Database : change isBunkrupt attribute of player to true
+        Activate Database
+
+        Database -> BackEnd : confirme
+        deactivate Database
+
+        BackEnd -> Database : change status of transaction were bancrupt player is sender or reciver to canceled
+        Activate Database
+
+        Database -> BackEnd : confirme
+        deactivate Database
+
+        BackEnd -> FrontEnd : confrime
+        deactivate BackEnd
+    end
+
+end
 
 loop every 1 second intel game ends
     FrontEnd -> BackEnd : get list of transactions(game)
