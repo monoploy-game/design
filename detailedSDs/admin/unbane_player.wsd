@@ -11,7 +11,7 @@ Admin ->  FrontEnd : banned players list
 FrontEnd -> BackEnd : get banned players(game)
 Activate BackEnd
 
-BackEnd -> Database : get list of banned players(game)
+BackEnd -> Database : get players list with status banned(game)
 Activate Database
 
 Database -> BackEnd : list of banned players
@@ -26,7 +26,7 @@ Admin -> FrontEnd : click unban on a specific banned player
 FrontEnd -> BackEnd : unbanne player (player)
 Activate BackEnd
 
-BackEnd -> Database : delete player from banned list (player, game)
+BackEnd -> Database : change player isBanned status to false(player, game)
 Activate Database
 
 Database -> BackEnd : confirme
@@ -38,10 +38,10 @@ deactivate BackEnd
 
 loop intel start or end game usecases are choosen
 
-    FrontEnd -> BackEnd : get joined players list
+    FrontEnd -> BackEnd : get players list
     Activate BackEnd
 
-    BackEnd -> Database : get list of joined players in the game
+    BackEnd -> Database : get players list in the game
     Activate Database
 
     Database -> BackEnd : list of game players

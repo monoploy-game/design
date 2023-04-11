@@ -15,7 +15,7 @@ Admin ->  System : choose a player from the list and unbane them
 System -> System : unbane player
 
 loop intel start or end game usecases are choosen
-    System -> System : get joined players list
+    System -> System : get players list
     System -> Admin : show players list
 end
 
