@@ -11,8 +11,40 @@ activate Player
 Admin -> System : click trasactions requests button
 System -> System : get list of transactions
 System -> Admin : show list of transactions
-Admin -> System : confirme a transaction
-System -> System : save transaction as confirmed and delete the amount from the sender and add it to the reciver
+
+alt accept transaction
+	Admin -> System : confirme a transaction
+	System -> System : check sender balance
+	activate System
+
+ 	alt  the sender new balance is positive
+		System -> System : balance
+		System -> System : do transaction
+
+	else the sender new balance is negative
+		System -> System : transaction impossible
+		System -> admin : ask to refuse or bankrupt or add moeny to player
+
+		alt refuse transaction
+			Admin -> System : refuse transaction
+			System -> System : refuse transaction
+
+		else bankrupt player
+			Admin -> System : bankrupt
+			System -> System : send money to reciver
+			System -> System : bankrupt player
+			
+		else add money
+			Admin -> System : add money to player
+			System -> System : add moeny to sender
+			System -> System : sende money to reciver
+
+		end
+else refuse transaction
+	Admin -> System : refuse transaction
+	System -> System : refuse transaction
+
+end
 
 loop every 1 second intel game ends
 System -> System : get list of transactions(game)

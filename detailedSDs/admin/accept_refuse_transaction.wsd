@@ -5,8 +5,7 @@ actor Admin
 Activate Admin
 Activate FrontEnd
 
-ref over FrontEnd, BackEnd, Database, player: initiat transaction to another player or bank
-Activate player
+ref over FrontEnd, BackEnd, Database : initiat transaction to another player or bank
 
 Admin ->  FrontEnd : click trasactions requests button
 
@@ -23,60 +22,141 @@ BackEnd -> FrontEnd : send list
 deactivate BackEnd
 
 FrontEnd -> Admin : show list of transactions request
-Admin -> FrontEnd : confirme a transaction
 
-FrontEnd -> BackEnd : confirme a transaction(id)
-Activate BackEnd
+alt accept transaction
+    Admin -> FrontEnd : confirme a transaction
 
-BackEnd -> Database : get the amount of money of the transaction
-Activate Database
+    FrontEnd -> BackEnd : confirme a transaction(id)
+    Activate BackEnd
 
-Database -> BackEnd : send the amount and sender and reciver
-deactivate Database
-
-alt  the sender new balance is positive
-    BackEnd -> Database : substracte the amount of money from the sender
+    BackEnd -> Database : get the amount of money of the transaction
     Activate Database
 
-    Database -> BackEnd : confirme
+    Database -> BackEnd : send the amount and sender and reciver
     deactivate Database
 
-    BackEnd -> Database : add the amount to the reciver
-    Activate Database
-
-    Database -> BackEnd : confirme
-    deactivate Database
-
-    deactivate BackEnd
-else the sender new balance is negative
-
-    BackEnd -> FrontEnd : cant accept transaction(info)
-    deactivate BackEnd
-
-    FrontEnd -> Admin : show options in the transaction to refuse transaction or bankrupt player
-
-    alt refuse transaction
-        ref over Admin, FrontEnd, BackEnd, Database, player: refuse transaction
-    else buncrupt player
-        Admin -> FrontEnd : click on buncrupt player
-        FrontEnd -> BackEnd : buncrupt player(player)
-        Activate BackEnd
-
-        BackEnd -> Database : change isBunkrupt attribute of player to true
+    alt  the sender new balance is positive
+        BackEnd -> Database : substracte the amount of money from the sender
         Activate Database
 
         Database -> BackEnd : confirme
         deactivate Database
 
-        BackEnd -> Database : change status of transaction were bancrupt player is sender or reciver to canceled
+        BackEnd -> Database : add the amount to the reciver
         Activate Database
 
         Database -> BackEnd : confirme
         deactivate Database
 
-        BackEnd -> FrontEnd : confrime
         deactivate BackEnd
+    else the sender new balance is negative
+
+        BackEnd -> FrontEnd : cant accept transaction(info)
+        deactivate BackEnd
+
+        FrontEnd -> Admin : show options in the transaction to refuse transaction or bankrupt or add money to player
+
+        alt refuse transaction
+
+            Admin -> FrontEnd : refuse transaction
+            FrontEnd -> BackEnd : refuse tranasction(transaction)
+            activate BackEnd
+
+            BackEnd -> Database : change transaction status to rejected
+            activate Database
+
+            Database -> BackEnd : confirme
+            deactivate Database
+
+            BackEnd -> FrontEnd : confirme
+            deactivate BackEnd
+
+
+        else buncrupt player
+
+            Admin -> FrontEnd : click on buncrupt player
+            FrontEnd -> BackEnd : buncrupt player(transaction)
+            Activate BackEnd
+
+            BackEnd -> Database : get reciver and sender and amount
+            Activate Database
+
+            Database -> BackEnd : sender, reciver, moeny
+            deactivate Database
+
+            BackEnd -> Database : substracte the amount of money from the sender
+            Activate Database
+
+            Database -> BackEnd : confirme
+            deactivate Database
+
+            BackEnd -> Database : add the amount to the reciver
+            Activate Database
+
+            Database -> BackEnd : confirme
+            deactivate Database
+
+            BackEnd -> Database : change isBunkrupt attribute of sender to true
+            Activate Database
+
+            Database -> BackEnd : confirme
+            deactivate Database
+
+            BackEnd -> Database : change status of transaction were bancrupt player is sender or reciver to canceled
+            Activate Database
+
+            Database -> BackEnd : confirme
+            deactivate Database
+
+            BackEnd -> FrontEnd : confrime
+            deactivate BackEnd
+
+        else add money to sender
+
+            Admin -> FrontEnd : Add moeny
+            FrontEnd -> Admin : ask for the amount
+            Admin -> FrontEnd : specify the amount
+            FrontEnd -> BackEnd : add amount(amount)
+            Activate BackEnd
+
+            BackEnd -> Database : add money to sender
+            Activate Database
+
+            Database -> BackEnd : confirme
+            deactivate Database
+
+            BackEnd -> Database : substracte the amount of money from the sender
+            Activate Database
+
+            Database -> BackEnd : confirme
+            deactivate Database
+
+            BackEnd -> Database : add the amount to the reciver
+            Activate Database
+
+            Database -> BackEnd : confirme
+            deactivate Database
+
+            BackEnd -> FrontEnd : confirme
+            deactivate BackEnd
+            end
+
     end
+
+else refuse transaction
+
+    Admin -> FrontEnd : refuse transaction
+    FrontEnd -> BackEnd : refuse tranasction(transaction)
+    activate BackEnd
+
+    BackEnd -> Database : change transaction status to rejected
+    activate Database
+
+    Database -> BackEnd : confirme
+    deactivate Database
+
+    BackEnd -> FrontEnd : confirme
+    deactivate BackEnd
 
 end
 
