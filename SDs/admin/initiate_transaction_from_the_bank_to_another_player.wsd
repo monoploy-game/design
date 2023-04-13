@@ -1,4 +1,4 @@
-@startuml "initiate transaction to another player"
+@startuml "initiate transaction a player"
 
 actor Admin
 
@@ -13,6 +13,6 @@ System -> Admin : show transaction initiation form
 Admin -> System : specify the amount and reciver player and confirme
 
 System -> System : add the moeny to the reciver player
-System -> Player : notify all the players
+System -> Admin : show confirmation
 
 @enduml

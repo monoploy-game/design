@@ -1,4 +1,4 @@
-@startuml "initiate transaction to another player"
+@startuml "initiate transaction to a player"
 
 actor Admin
 
@@ -15,12 +15,21 @@ Admin -> FrontEnd : specify the amount and reciver player and confirme
 FrontEnd -> BackEnd : initiate transaction(reciver player, amount)
 activate BackEnd
 
-BackEnd -> Database : add amount to player balance
+BackEnd -> Database : add a transaction (amount, sender=bank, reciver, status=approved)
 Activate Database
 
 Database -> BackEnd : confirme
+deactivate Database
+
+BackEnd -> Database : add a amount of money to player(amount, player)
+Activate Database
+
+Database -> BackEnd : confirme
+deactivate Database
+
+BackEnd -> FrontEnd : confrime
 deactivate BackEnd
 
-Database -> player : notify all the players about the transaction
+FrontEnd -> Admin : show success
 
 @enduml
