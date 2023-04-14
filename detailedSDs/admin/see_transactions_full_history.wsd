@@ -20,6 +20,6 @@ deactivate Database
 BackEnd -> FrontEnd : list of transactions
 
 
-FrontEnd -> Admin : show history
+FrontEnd -> Admin : show transactions in order
 
 @enduml
