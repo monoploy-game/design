@@ -11,7 +11,7 @@ Admin -> FrontEnd : choose bank
 FrontEnd -> BackEnd : get bank transactions history(game)
 Activate BackEnd
 
-BackEnd -> Database : get list of transactions with status validated(game, bank)
+BackEnd -> Database : get list of transactions with status validated where sender == baank or reciver == bank and game = game
 Activate Database
 
 Database -> BackEnd : list of transactions
@@ -20,6 +20,6 @@ deactivate Database
 BackEnd -> FrontEnd : list of transactions
 
 
-FrontEnd -> Admin : show history
+FrontEnd -> Admin : show transactions in time order
 
 @enduml
