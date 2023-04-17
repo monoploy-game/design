@@ -17,37 +17,37 @@ Player -> FrontEnd : fill forum
 FrontEnd -> BackEnd : post forum(game, player, reciver, amount)
 Activate BackEnd
 
-BackEnd -> DataBase : get player money data
+BackEnd -> DataBase : add request to transactions table with status waiting)
 Activate DataBase
-
-DataBase -> BackEnd : data
+DataBase -> BackEnd : confirme
 deactivate DataBase
 
-BackEnd -> BackEnd : compare amount with data
+BackEnd -> FrontEnd : confirme
 
-alt available case
-    BackEnd -> DataBase : add request to request table
-    Activate DataBase
+ref over Admin, BackEnd, DataBase : confirme/refuse transaction
 
-    DataBase -> BackEnd : confirme
-    deactivate DataBase
+FrontEnd -> BackEnd : get status
+BackEnd -> DataBase : check game status if not ended yet/started, 
+activate DataBase
 
-    ref over Admin, BackEnd, DataBase : confirme/refuse transaction
+DataBase -> BackEnd : confirme
+deactivate DataBase
 
-    FrontEnd -> BackEnd : get new state
-    BackEnd -> DataBase : get new state
-    activate DataBase
+BackEnd -> DataBase : check player status isBankerypt(player)
+activate DataBase
 
-    DataBase -> BackEnd : data
-    BackEnd -> FrontEnd : data
-    FrontEnd -> Player : show new scene
+DataBase -> BackEnd : confirme
+deactivate DataBase
 
-else unavailable case
-    BackEnd -> FrontEnd : moeny not enough
-    deactivate BackEnd
+BackEnd -> DataBase : get player reserve (player)
+activate DataBase
 
-    FrontEnd -> Player : moeny not enough
-end
+DataBase -> BackEnd : response with data(reserve)
+deactivate DataBase
+
+BackEnd -> FrontEnd : status(Data)
+FrontEnd -> Player : show new scene
+
 
 
 @enduml
