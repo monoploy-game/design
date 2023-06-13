@@ -26,4 +26,5 @@ deactivate dataBase
 BackEnd -> GuestFrontEnd : players list
 
 GuestFrontEnd -> Guest : send to the waiting room
+
 @enduml

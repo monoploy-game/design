@@ -1,8 +1,6 @@
-@@startuml
+@startuml
 
 actor Guest
-
-
 
 ref over Guest,FrontEnd,BackEnd,dataBase: create games by admin
 
@@ -24,6 +22,4 @@ deactivate BackEnd
 
 FrontEnd -> Guest : show available games
 
-
-
-@@enduml
+@enduml

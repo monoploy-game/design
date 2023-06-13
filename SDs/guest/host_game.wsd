@@ -14,6 +14,4 @@ loop intel start or end game usecases are choosen
     System -> Guest : show players list
 end
 
-
-
 @enduml

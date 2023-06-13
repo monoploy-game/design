@@ -19,6 +19,4 @@ loop intel start or end game usecases are choosen
     System -> Admin : show players list
 end
 
-
-
 @enduml

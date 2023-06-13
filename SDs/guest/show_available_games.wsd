@@ -1,4 +1,4 @@
-@@startuml
+@startuml
 
 actor Guest
 
@@ -13,4 +13,4 @@ Activate Guest
 System -> System : get available games
 System -> Guest : show available games
 
-@@enduml
+@enduml
